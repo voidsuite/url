@@ -1,0 +1,17 @@
+{
+  "name": "Void Links",
+  "short_name": "Void Links",
+  "description": "Short links with click analytics and custom domains.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#151211",
+  "theme_color": "#151211",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
