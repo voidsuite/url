@@ -13,7 +13,7 @@ import {
 import { useAuth } from "@/contexts/auth"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { VoidLogo } from "@/components/VoidLogo"
-import { ThemeToggle } from "@/components/ThemeToggle"
+import { AppearanceMenu } from "@/components/layout/AppearanceMenu"
 import { Button } from "@/components/ui/button"
 import { initials } from "@/lib/format"
 import { cn } from "@/lib/utils"
@@ -91,7 +91,7 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-1 sm:gap-1.5">
-          <ThemeToggle />
+          <AppearanceMenu />
           {user ? (
             <div className="relative" ref={menuRef}>
               <button
@@ -131,7 +131,7 @@ export function TopBar() {
                   </button>
                   {isAdmin && (
                     <a
-                      href="https://auth.stwupid.tech"
+                      href="https://auth.voidsuite.cc"
                       className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs transition-colors hover:bg-muted/50"
                     >
                       <ShieldCheck className="size-3.5" />
