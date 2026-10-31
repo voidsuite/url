@@ -31,6 +31,7 @@ export interface DomainDto {
     txtName: string
     txtValue: string | null
     cnameTarget: string
+    aTarget: string | null
   }
 }
 
@@ -111,6 +112,7 @@ export function domainDto(domain: DomainRow): DomainDto {
       txtName: `${config.domains.txtPrefix}.${domain.hostname}`,
       txtValue: domain.verification_token,
       cnameTarget: config.domains.cnameTarget,
+      aTarget: config.domains.aTarget || null,
     },
   }
 }

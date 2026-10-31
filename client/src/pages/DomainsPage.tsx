@@ -215,15 +215,24 @@ export function DomainsPage() {
                     <p className="text-[11px] font-medium">DNS records</p>
                     <span className="text-[10px] text-muted-foreground">Add these at your registrar</span>
                   </div>
-                  <DnsRow label="TXT name" value={domain.dns.txtName} />
-                  <DnsRow label="TXT value" value={domain.dns.txtValue ?? "Unavailable"} />
                   <DnsRow
                     label="CNAME (recommended)"
                     value={domain.dns.cnameTarget}
-                    hint="Point the hostname itself here so short links resolve."
+                    hint={`Create ${domain.hostname} → ${domain.dns.cnameTarget}. This both routes short links and verifies ownership.`}
                   />
+                  <DnsRow label="TXT name (optional)" value={domain.dns.txtName} />
+                  <DnsRow label="TXT value (optional)" value={domain.dns.txtValue ?? "Unavailable"} />
+                  {domain.dns.aTarget && (
+                    <DnsRow
+                      label="A record (only with TXT)"
+                      value={domain.dns.aTarget}
+                      hint={`If you verify by TXT instead, point ${domain.hostname} at this address too.`}
+                    />
+                  )}
                   <p className="text-[10px] leading-relaxed text-muted-foreground">
-                    Publish one of the two records, then click Check DNS. Propagation can take a few minutes.
+                    Use the CNAME alone, or the TXT + A pair when your provider cannot put a CNAME on this
+                    hostname. After DNS propagates click Check DNS — the HTTPS certificate is issued
+                    automatically, and we email you when the domain is live.
                   </p>
                 </div>
               )}

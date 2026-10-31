@@ -23,6 +23,7 @@ export interface Domain {
     txtName: string
     txtValue: string | null
     cnameTarget: string
+    aTarget: string | null
   }
 }
 

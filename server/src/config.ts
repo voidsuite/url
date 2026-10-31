@@ -134,7 +134,30 @@ const config = {
     txtPrefix: trim(process.env.DOMAIN_TXT_PREFIX) || "_voidurl",
     cnameTarget:
       trim(process.env.DOMAIN_CNAME_TARGET) || hostOf(shortDomainOrigins[0]) || "v0id.cc",
+    // Optional A-record target shown when a user verifies by TXT instead of CNAME.
+    aTarget: trim(process.env.DOMAIN_A_TARGET),
     allowUnverified: bool(process.env.ALLOW_UNVERIFIED_DOMAINS, !isProduction),
+  },
+  provisioning: {
+    // Creates a per-domain nginx vhost and Let's Encrypt certificate once DNS
+    // points here. Enabled by default in production; the helper script must
+    // exist on the host.
+    enabled: bool(process.env.DOMAIN_PROVISION_ENABLED, isProduction),
+    script: trim(process.env.DOMAIN_PROVISION_SCRIPT) || "/usr/local/bin/voidurl-domain",
+  },
+  smtp: {
+    host: trim(process.env.SMTP_HOST),
+    port: int(process.env.SMTP_PORT, 587),
+    secure: bool(process.env.SMTP_SECURE, false),
+    user: trim(process.env.SMTP_USER),
+    pass: trim(process.env.SMTP_PASS),
+    from: trim(process.env.SMTP_FROM) || trim(process.env.SMTP_USER),
+    fromName: trim(process.env.SMTP_FROM_NAME) || "Void Links",
+    // Extra recipients (for example the operator) copied on domain events.
+    notify: trim(process.env.NOTIFY_EMAIL)
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean),
   },
   abuseContact: trim(process.env.ABUSE_CONTACT) || "",
   blockedHosts: trim(process.env.BLOCKED_HOSTS)
